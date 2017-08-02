@@ -35,7 +35,7 @@ Docker containers are designed to be ephemeral, so if you need persistent data f
 For example, if your data directory is at `/Users/yourname/data`, start your container with this command:
 
 ```bash
-docker run -it -p 8888:8888 -v /Users/yourname/data:/home/docker/data deeprig/fastai-course-1
+docker run -it -p 8888:8888 -v /Users/yourname/data:/home/docker/data nabin99sharma/pdl
 ```
 
 Your local data directory will now be visible in the container at `/home/docker/data`.
@@ -44,55 +44,3 @@ Your local data directory will now be visible in the container at `/home/docker/
 All packages should ideally be part of the Dockerfile. If something is missing, please open an issue or submit a PR to update the Dockerfile. If you need to install something as a workaround, follow the steps below:
 1. Get a shell into the running container with `docker exec -it <container_name> /bin/bash`
 2. `sudo apt-get update && sudo apt-get install package_name`
-
-## Running on AWS
-I've build preconfigured AMIs for `us-west-2` that include Docker and nvidia-docker (for p2 instances). You can spin up instances based on them using the commands below:
-### GPU instance
-```bash
-# spin up a p2.xlarge instance
-docker-machine create \
-  --driver amazonec2 \
-  --amazonec2-region='us-west-2' \
-  --amazonec2-root-size=50 \
-  --amazonec2-ami='ami-e03a8480' \
-  --amazonec2-instance-type='p2.xlarge' \
-  fastai-p2
-
-# open Jupyter port 8888
-aws ec2 authorize-security-group-ingress --group-name docker-machine --port 8888 --protocol tcp --cidr 0.0.0.0/0
-
-# open an SSH shell on the new machine
-docker-machine ssh fastai-p2
-
-# (on the remote machine fastai-p2) run Jupyter interactively
-nvidia-docker run -it -p 8888:8888 deeprig/fastai-course-1
-
-# (on your local machine) get the IP of the new machine:
-docker-machine ip fastai-p2
-```
-Open http://[NEW_MACHINE_IP]:8888 in your browser to view notebooks.
-
-### CPU instance
-```bash
-# spin up a t2.xlarge instance
-docker-machine create \
-  --driver amazonec2 \
-  --amazonec2-region='us-west-2' \
-  --amazonec2-root-size=50 \
-  --amazonec2-ami='ami-a073cdc0' \
-  --amazonec2-instance-type='t2.xlarge' \
-  fastai-t2
-
-# open Jupyter port 8888
-aws ec2 authorize-security-group-ingress --group-name docker-machine --port 8888 --protocol tcp --cidr 0.0.0.0/0
-
-# open an SSH shell on the new machine
-docker-machine ssh fastai-t2
-
-# (on the remote machine fastai-t2) run Jupyter interactively
-docker run -it -p 8888:8888 deeprig/fastai-course-1
-
-# (on your local machine) get the IP of the new machine:
-docker-machine ip fastai-t2
-```
-Open http://[NEW_MACHINE_IP]:8888 in your browser to view notebooks.
