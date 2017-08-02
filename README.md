@@ -35,7 +35,7 @@ Docker containers are designed to be ephemeral, so if you need persistent data f
 For example, if your data directory is at `/Users/yourname/data`, start your container with this command:
 
 ```bash
-docker run -it -p 8888:8888 -v /Users/yourname/data:/home/docker/data nsharmarijal/pdl
+docker run -it -p 7777:7777 -v /Users/yourname/data:/home/docker/data nsharmarijal/pdl
 ```
 
 Your local data directory will now be visible in the container at `/home/docker/data`.
