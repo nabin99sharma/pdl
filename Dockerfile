@@ -61,7 +61,7 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_ROOT/lib64
 EXPOSE 7777
 
 # Clone fast.ai source
-RUN git clone -q https://github.com/nabin99sharma/pdl
+#RUN git clone -q https://github.com/nabin99sharma/pdl
 WORKDIR /home/
 
 ENTRYPOINT ["/tini", "--"]
