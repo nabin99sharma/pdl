@@ -21,12 +21,12 @@ The container comes with:
 
 #### CPU Only
 ```bash
-docker run -it -p 8888:8888 deeprig/fastai-course-1
+docker run -it -p 7777:7777 nabin99sharma/pdl
 ```
 
 #### With GPU
 ```bash
-nvidia-docker run -it -p 8888:8888 deeprig/fastai-course-1
+nvidia-docker run -it -p 7777:7777 nabin99sharma/pdl
 ```
 
 ## Data management
