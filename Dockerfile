@@ -1,6 +1,6 @@
 FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu16.04
 
-MAINTAINER Nabin Sharma <nabin99sharma@gmail.com>
+#MAINTAINER Nabin Sharma <nabin99sharma@gmail.com>
 
 ARG PYTHON_VERSION=2.7
 ARG CONDA_PYTHON_VERSION=2
